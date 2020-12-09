@@ -1,19 +1,18 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
+const axios = require('axios');
 
-try {
-  const myToken = core.getInput('myToken');
-  const octokit = github.getOctokit(myToken);
-  const checkRun = octokit.checks.create({
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-    name: "Automator Action",
-    head_sha: github.context.payload.head,
+const URL = "https://ht9ztjsdg5.execute-api.us-east-1.amazonaws.com/prod/trigger-build";
+
+async function run() {
+  const userKeyId = core.getInput('userKeyId');
+  const userKeySecret = core.getInput('userKeySecret');
+  const testSuiteId = core.getInput('testSuiteId');
+  const response = await axios.post(URL, {
+    userKeyId,
+    userKeySecret,
+    testSuiteId,
   });
-  core.setOutput("checkRunId", checkRun.id);
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
-} catch (error) {
-  core.setFailed(error.message);
+  core.setOutput("buildId", JSON.parse(response.data).buildId);
 }
+
+run.then(() => {}).catch(e => core.setFailed(error.message));

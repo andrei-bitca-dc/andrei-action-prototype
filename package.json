@@ -1,6 +1,6 @@
 {
   "name": "action-proto",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,6 @@
   "homepage": "https://github.com/andrei-bitca-dc/andrei-action-prototype#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0"
+    "axios": "^0.21.0"
   }
 }
