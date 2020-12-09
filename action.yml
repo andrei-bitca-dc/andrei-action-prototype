@@ -1,18 +1,12 @@
-name: 'Automator'
+name: 'andrei-action-prototype'
 description: 'Greet someone and record the time'
 inputs:
-  testSuiteId:
-    description: 'Test Suite ID'
-    required: true
-  userKeyId:
-    description: 'User Key ID'
-    required: true
-  userKeySecret:
-    description: 'User Key Secret'
+  token:
+    description: 'Token'
     required: true
 outputs:
-  buildId:
-    description: 'The build id that was generated'
+  checkRunId:
+    description: 'The check run id that was generated'
 runs:
   using: 'node12'
   main: 'index.js'
