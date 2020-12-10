@@ -8,8 +8,7 @@ async function run() {
   const userKeyId = core.getInput("userKeyId");
   const userKeySecret = core.getInput("userKeySecret");
   const testSuiteId = core.getInput("testSuiteId");
-  console.log(JSON.stringify(github.context));
-  const { sha, repo: { owner: repoOwner, repo: repoName } } = github.context;
+  const { payload: { pull_request: { head: { sha } } }, repo: { owner: repoOwner, repo: repoName } } = github.context;
   const response = await axios.post(URL, {
     userKeyId,
     userKeySecret,
