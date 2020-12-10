@@ -15,4 +15,4 @@ async function run() {
   core.setOutput("buildId", JSON.parse(response.data).buildId);
 }
 
-run.then(() => {}).catch(e => core.setFailed(error.message));
+run.then(() => {}).catch(e => core.setFailed(e.message));
