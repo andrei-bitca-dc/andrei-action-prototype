@@ -9,7 +9,7 @@ async function run() {
   const userKeySecret = core.getInput("userKeySecret");
   const testSuiteId = core.getInput("testSuiteId");
   const { payload: { pull_request: { head: { sha } } }, repo: { owner: repoOwner, repo: repoName } } = github.context;
-  const response = await axios.post(URL, {
+  await axios.post(URL, {
     userKeyId,
     userKeySecret,
     testSuiteId,
@@ -17,7 +17,7 @@ async function run() {
     repoName,
     sha,
   });
-  core.setOutput("buildId", JSON.parse(response.data).buildId);
+  core.setOutput("buildId", "1");
 }
 
 run().then(() => {}).catch(e => core.setFailed(e.message));
